@@ -26,10 +26,10 @@ var chartGroup = svg.append("g")
 
 // Import data from csv 
 
-d3.csv("D3_data_journalism/assets/data/data.csv").then(function(data) {
+d3.csv("data.csv").then(function(healthData) {
 
    
-    console.log(data)
+    console.log(healthData);
 
 
 });
