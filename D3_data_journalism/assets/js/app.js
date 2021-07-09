@@ -26,13 +26,14 @@ var chartGroup = svg.append("g")
 
 // Import data from csv 
 
-d3.csv("data.csv").then(function(healthData) {
-
-   
+d3.csv("assets/data/data.csv").then(function(healthData) {
+    // See if data is printing well in console log
     console.log(healthData);
 
 
 });
+
+
 
 
 
