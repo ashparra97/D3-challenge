@@ -1,21 +1,39 @@
-// Generate SVG 
+// Set up chart 
 
-var svg = d3.select("body")
-    .append("svg");
+var svgWidth = 960; 
+var svgHeight = 500; 
 
-// Update attributes in svg 
-svg.attr("width", "100px")
-    .attr("height", "100px");
+var margin = {
+    top: 20, 
+    right: 40, 
+    bottom: 60, 
+    left: 50
+};
+
+var width = svgWidth - margin.left - margin.right;
+var height = svgHeight - margin.top - margin.bottom;
+
+// SVG wrapper 
+
+var svg = d3
+    .select("body")
+    .append("svg")
+    .attr("width", svgWidth)
+    .attr("height", svgHeight);
+
+var chartGroup = svg.append("g")
+    .attr("transform", `translate(${margin.left}, ${margin.top})`);
+
+// Import data from csv 
+
+d3.csv("D3_data_journalism/assets/data/data.csv").then(function(data) {
+
+   
+    console.log(data)
+
+
+});
 
 
 
 
-
-// Import Data 
-
-//d3.csv("").then(function(NAMEOFFUNCTION) {
-
-
-
-
-//});
