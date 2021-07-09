@@ -1,4 +1,4 @@
-// Set up chart 
+// Set up chart
 
 var svgWidth = 960; 
 var svgHeight = 500; 
@@ -27,8 +27,54 @@ var chartGroup = svg.append("g")
 // Import data from csv 
 
 d3.csv("assets/data/data.csv").then(function(healthData) {
-    // See if data is printing well in console log
+    // Step 1: See if data is printing well in console log
     console.log(healthData);
+
+    // Step 2: Parse the data 
+    healthData.forEach(function(data){
+        data.poverty = +data.poverty; 
+        data.obesity = +data.obesity;
+    });
+
+
+    // Step 3: Create scales 
+    // x-axis (poverty)
+    var xLinearScale1 = d3.scaleLinear()
+        .domain([0, d3.max(healthData, d => d.poverty)])
+        .range([0, width]);
+
+    // y-axis (poverty)
+    var yLinearScale1 = d3.scaleLinear()
+    .domain([0, d3.max(healthData, d => d.obesity)])
+    .range([height, 0]);
+
+    // Step 4: Create axes
+    var bottomAxis = d3.axisBottom(xLinearScale1);
+    var leftAxis = d3.axisLeft(yLinearScale1);
+
+    // Step 5: Append axes to chartGroup
+    // Add styling to x-axis
+    chartGroup.append('g')
+        .attr("transform", `translate(0, ${height})`)
+        .call(bottomAxis);
+
+    // Add styling to x-axis
+    chartGroup.append('g')
+    .call(leftAxis);
+
+    // Step 6: Add circles 
+    var circlesGroup = chartGroup.selectAll("circle")
+        .data(healthData)
+        .enter()
+        .append("circle")
+        .attr("cx", d => xLinearScale1(d.poverty))
+        .attr("cy", d => yLinearScale1(d.obesity))
+        .attr("r", "5")
+        .attr("fill", "red");
+
+    // Append a div to the body to create tool tips 
+    
+
 
 
 });
