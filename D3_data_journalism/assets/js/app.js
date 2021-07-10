@@ -41,12 +41,12 @@ d3.csv("assets/data/data.csv").then(function(healthData) {
     // Step 3: Create scales 
     // x-axis (poverty)
     var xLinearScale1 = d3.scaleLinear()
-        .domain([0, d3.max(healthData, d => d.poverty)])
+        .domain([0, d3.max(healthData, d => d.poverty) + 10])
         .range([0, width]);
 
     // y-axis (poverty)
     var yLinearScale1 = d3.scaleLinear()
-    .domain([0, d3.max(healthData, d => d.obesity)])
+    .domain([0, d3.max(healthData, d => d.obesity) + 10])
     .range([height, 0]);
 
     // Step 4: Create axes
