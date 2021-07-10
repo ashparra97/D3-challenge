@@ -9,7 +9,7 @@ var margin = {
     top: 20, 
     right: 40, 
     bottom: 60, 
-    left: 50
+    left: 80
 };
 
 var width = svgWidth - margin.left - margin.right;
@@ -51,6 +51,7 @@ d3.csv("assets/data/data.csv").then(function(healthData) {
 
     // Step 4: Create axes
     var bottomAxis = d3.axisBottom(xLinearScale1);
+    
     var leftAxis = d3.axisLeft(yLinearScale1);
 
     // Step 5: Append axes to chartGroup
@@ -61,7 +62,7 @@ d3.csv("assets/data/data.csv").then(function(healthData) {
 
     // Add styling to x-axis
     chartGroup.append('g')
-    .call(leftAxis);
+        .call(leftAxis);
 
     // Step 6: Add circles 
     var circlesGroup = chartGroup.selectAll("circle")
@@ -76,37 +77,40 @@ d3.csv("assets/data/data.csv").then(function(healthData) {
 
     // Add State abbreviations to circles
     svg.append("g")
-      .selectAll("circle")
-      .data(healthData)
-      .enter()
-      .append("text")
-      //.merge(circlesGroup)
-      .text(function(d) {
+        .selectAll("circle")
+        .data(healthData)
+        .enter()
+        .append("text")
+        //.merge(circlesGroup)
+        .text(function(d) {
         return d.abbr
-      })
-      .attr("transform", `translate(${margin.left}, ${margin.top})`)
-      .attr("dx", (d) => {return xLinearScale1(d.poverty)})
-      .attr("dy", (d) => {return yLinearScale1(d.obesity)})
-      .attr("font-size", "10px")
-      .attr("class", "stateText");
+        })
+        .attr("transform", `translate(${margin.left}, ${margin.top})`)
+        .attr("dx", (d) => {return xLinearScale1(d.poverty)})
+        .attr("dy", (d) => {return yLinearScale1(d.obesity)})
+        .attr("font-size", "10px")
+        .attr("class", "stateText");
 
 
 
     // x-axis Label
     chartGroup.append("text")
-      .attr("transform", `translate(${width / 2}, ${height + margin.top + 20})`)
-      .attr("text-anchor", "middle")
-      .attr("font-size", "16px")
-      .attr("fill", "green")
-      .text("Poverty Rate (%)")
+        .attr("transform", `translate(${width / 2}, ${height + margin.top + 20})`)
+        .attr("text-anchor", "middle")
+        .attr("font-size", "16px")
+        .attr("fill", "black")
+        .text("Poverty Rate (%)");
     
      // y-axis Label
-     chartGroup.append("text")
-     .attr("transform", "rotate(-90)")
-     .attr("text-anchor", "end")
-     .attr("y", -30)
-     .attr("dy", "1em")
-     .text("Obesity Rate(%)")
+    chartGroup.append("text")
+        .attr("text-anchor", "end")
+        .attr("y", -50)
+        .attr("x", -160)
+        .attr("dy", "1em")
+        .attr("fill", "black")
+        .attr("font-size", "16px")
+        .attr("transform", "rotate(-90)")
+        .text("Obesity Rate(%)");
 
 });
 
