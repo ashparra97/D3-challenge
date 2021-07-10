@@ -1,3 +1,5 @@
+// The relationship between poverty and obesity 
+
 // Set up chart
 
 var svgWidth = 960; 
@@ -35,7 +37,6 @@ d3.csv("assets/data/data.csv").then(function(healthData) {
         data.poverty = +data.poverty; 
         data.obesity = +data.obesity;
     });
-
 
     // Step 3: Create scales 
     // x-axis (poverty)
@@ -97,17 +98,15 @@ d3.csv("assets/data/data.csv").then(function(healthData) {
       .attr("text-anchor", "middle")
       .attr("font-size", "16px")
       .attr("fill", "green")
-      .text("Poverty Rate")
+      .text("Poverty Rate (%)")
     
      // y-axis Label
      chartGroup.append("text")
-     .attr("transform", `translate(${width / 2}, ${height + margin.top + 20})`)
-     .attr("text-anchor", "middle")
-     .attr("font-size", "16px")
-     .attr("fill", "green")
-     .text("Poverty Rate")
-
-
+     .attr("transform", "rotate(-90)")
+     .attr("text-anchor", "end")
+     .attr("y", -30)
+     .attr("dy", "1em")
+     .text("Obesity Rate(%)")
 
 });
 
