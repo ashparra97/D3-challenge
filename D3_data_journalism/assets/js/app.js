@@ -113,9 +113,3 @@ d3.csv("assets/data/data.csv").then(function(healthData) {
         .text("Obesity Rate(%)");
 
 });
-
-
-
-
-
-
