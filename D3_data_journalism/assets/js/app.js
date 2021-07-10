@@ -69,11 +69,43 @@ d3.csv("assets/data/data.csv").then(function(healthData) {
         .append("circle")
         .attr("cx", d => xLinearScale1(d.poverty))
         .attr("cy", d => yLinearScale1(d.obesity))
-        .attr("r", "5")
-        .attr("fill", "red");
+        .attr("r", "20")
+        .attr("fill", "teal");
 
-    // Append a div to the body to create tool tips 
+
+    // Add State abbreviations to circles
+    svg.append("g")
+      .selectAll("circle")
+      .data(healthData)
+      .enter()
+      .append("text")
+      //.merge(circlesGroup)
+      .text(function(d) {
+        return d.abbr
+      })
+      .attr("transform", `translate(${margin.left}, ${margin.top})`)
+      .attr("dx", (d) => {return xLinearScale1(d.poverty)})
+      .attr("dy", (d) => {return yLinearScale1(d.obesity)})
+      .attr("font-size", "10px")
+      .attr("class", "stateText");
+
+
+
+    // x-axis Label
+    chartGroup.append("text")
+      .attr("transform", `translate(${width / 2}, ${height + margin.top + 20})`)
+      .attr("text-anchor", "middle")
+      .attr("font-size", "16px")
+      .attr("fill", "green")
+      .text("Poverty Rate")
     
+     // y-axis Label
+     chartGroup.append("text")
+     .attr("transform", `translate(${width / 2}, ${height + margin.top + 20})`)
+     .attr("text-anchor", "middle")
+     .attr("font-size", "16px")
+     .attr("fill", "green")
+     .text("Poverty Rate")
 
 
 
